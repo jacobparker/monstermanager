@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>DM</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="https://unpkg.com/vuex/dist/vuex.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"</script> -->
+    <body>
+
+                  <div id="app">
+                        
+                        <form>
+                                <!-- <div v-for="(cat,index) in cats">
+                                        <p>
+                                        <span>{{cat}}</span> <button @click="removeCat(index)">Remove</button>
+                                        </p>
+                                      </div> -->
+                                      <h4>Add new item</h4>
+                                        <div class="row col-md-6">
+                                            <div class="col-md-4 form-group">
+                                                Name
+                                                <input type="text" v-model="name" class="checkbox">
+                                            </div>
+                                            <div class="col-md-4 form-group">
+                                                Quantity
+                                                <input type="number" v-model="quantity" class="checkbox" autofocus>
+                                            </div>
+                                            <div class="col-md-4 form-group"> Options
+                                                <select class="form-control" v-model="image">
+                                                    <option>monster1</option>
+                                                    <option>monster2</option>
+                                                    <option>monster3</option>
+                                                    <option>monster4</option>
+                                                </select>
+                                            </div>
+                                            <button type="button" @click="addCat" class="btn btn-primary" >Add</button>
+                                        </div>
+                                      <!-- <div>
+                                        <p>Name: <input v-model="name"></p> <p>Quantity: <input type="number" v-model="quantity"></p>
+                                        <button @click="addCat">Add Item</button>
+                                      </div> -->
+                                      <h2>Item List</h2>
+                                      <table id="shopping-list-table" class="table table-condensed table-hover">
+                                            <thead>
+                                               <tr>
+                                                 <th>Name</th>
+                                                 <th>Quantity</th>
+                                                 <th>Total Quantity</th>
+                                                 <th>Image</th>
+                                                 <th>Actions</th>
+                                               </tr>
+                                            </thead>
+                                            <tr v-for="(cat, index) in cats">
+                                              <td>
+                                                <span v-show="!cat.inEditMode">{{ cat.name }}</span>
+                                                <input v-bind:placeholder="cat.name" v-show="cat.inEditMode" v-model="cat.name" />
+                                              </td>
+                                              <td>
+                                                <span v-show="!cat.inEditMode">{{ cat.quantity }}</span>
+                                                <input type="number" v-bind:placeholder="cat.quantity" v-show="cat.inEditMode" v-model="cat.quantity" /> 
+                                              </td>
+                                              <td>
+                                                 <span>{{ cat.total }}</span>
+                                               </td>
+                                               <td>
+                                                    <span>{{ cat.image }}</span>
+                                                  </td>
+                                               
+                                               <td>
+                                                <button type="button" class="btn btn-success" v-show="cat.inEditMode" @click="editItemComplete(cat)"><i class="fa fa-save"></i> Save</button>
+                                                <button type="button" class="btn btn-info" v-show="!cat.inEditMode" @click="editItem(cat)"  ><i class="fa fa-edit"></i> Edit</button>
+                                                <button type="button" class="btn btn-danger" @click="removeCat(index)"><i class="fa fa-remove"></i> Delete</button>
+                                              </td>
+                                            </tr>
+                                          </table>
+
+
+                        </form>
+                        
+                        
+                      </div>
+                        
+                  
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Viewer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script src="view.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="https://unpkg.com/vuex/dist/vuex.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <meta http-equiv="refresh" content="5"> -->
+    <body>
+
+            <h2>Viewer</h2>
+            <div id="app">
+                <div class="card-group">
+                    <div class="card ow col-md-12" v-for="(item,index) in items">
+                      <img class="card-img-top" v-bind:src="'images/' + item.image + '.jpg'" alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                      </div>
+                    </div>
+                </div>
+            </div>
+                  
+    </body>
+</html>

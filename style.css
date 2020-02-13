@@ -1,0 +1,116 @@
+/* .monster {
+  width: 100px;
+  display: inline-block;
+}
+
+@import "breakpoint";
+$breakpoint-to-ems: true;
+$bp-phone-landscape: (min-resolution 1.5dppx) (orientation landscape);
+
+* {
+  box-sizing: border-box;
+}
+
+.listing {
+  list-style-type: none;
+  overflow: hidden;
+  padding: 0;
+  
+  font-size: 18px;
+  li {
+    float: left;
+    width: 12em;
+    text-align: center;
+    border: 1px #ddd solid;
+    background: white;
+    margin: 5px;
+    cursor: pointer;
+    img {
+      width: 100%;
+    }
+    > a:hover {
+      background: #eee;
+    }
+        .counter {
+            display: block;
+        }
+    @include breakpoint($bp-phone-landscape) {
+      width: 12em;
+      font-size: 1.5em;
+      .counter {
+        font-size: 2em;
+        a {
+          padding: 5px 21px;
+        }
+      }
+    }
+  }
+}
+
+.item-view {
+  text-align: center;
+}
+
+.item {
+  padding: 10px;
+}
+
+a {
+  display: inline-block;
+  padding: 10px;
+  border: 1px #ddd solid;
+  background: white;
+  color: black;
+  margin: 10px;
+    text-decoration: none;
+  &.back-listing {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+.logo {
+    width: 50px;
+    float: left;
+    margin-right: 15px;
+  }
+  
+  .form-group {
+    max-width: 500px;
+  }
+  
+  .actions {
+    padding: 10px 0;
+  }
+  
+  .glyphicon-euro {
+    font-size: 12px;
+  }
+   */
+
+
+body {
+  padding: 1%;
+  background-color: #fff
+}
+
+h2, h4 {
+  font-family: 'Nunito', sans-serif;
+}
+
+
+#shopping-list-table{
+  table-layout: fixed;
+  width: 50%;
+  vertical-align: middle;
+}
+
+button {
+  margin-left: 2%;
+}
+
+.viewer-images {
+    width: 200px;
+    height: 200px;
+}
