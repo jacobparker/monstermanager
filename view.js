@@ -7,12 +7,24 @@ window.onload = function () {
           images: ''
         },
         mounted() {
-            if(localStorage.getItem('cats')) {
-                this.items = JSON.parse(localStorage.getItem('cats'));
-            }
-            window.addEventListener("storage", this.onStorageUpdate);
+            this.getList();
         },
         methods: {
+             getList() {
+                 this.$http.get('https://dndviewer-6683c.firebaseio.com/' + ".json")
+                .then(response => {
+                  this.items = response.data;
+                  // console.log("this.cats: " + this.cats);
+                  // console.log("this.cats.name: " + this.cats.name);
+                  // for(var i in this.cats){
+                  //   //this.catsUpdated[i].push = this.cats;
+                  //    console.log("this.cats: " + this.cats[i]);
+                  // }
+                }).bind(this)
+                .catch(error => {
+                  console.log(error)
+                })
+           }
 
         }
       })
