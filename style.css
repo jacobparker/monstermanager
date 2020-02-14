@@ -100,7 +100,7 @@ body {
   background-size: cover;
 }
 
-/*.dm_background {
+.dm_background {
   background-image: url(images/dm_background.jpg);
   background-position: center center;
   background-repeat: no-repeat;
@@ -108,10 +108,11 @@ body {
   background-size: cover;
   background-color: #464646;
   color: #fff;
-}*/
+}
 
 h2, h4 {
   font-family: 'Nunito', sans-serif;
+  color: #fff;
 }
 
 .card-body {
@@ -126,6 +127,10 @@ h2, h4 {
   table-layout: fixed;
   width: 50%;
   vertical-align: middle;
+}
+
+.form-group {
+ color: #fff; 
 }
 
 button {
