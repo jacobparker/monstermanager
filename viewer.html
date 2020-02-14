@@ -11,19 +11,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- <meta http-equiv="refresh" content="5"> -->
-    <body>
+    <body class="background">
 
-            <h2>Viewer</h2>
-            <div id="app">
+            <!-- <h2>Viewer</h2> -->
+            <div class="container" id="app">
+                <div class="row">
+                    <div class="col-md-3" v-for="(item,index) in items">
+                      <img class="card-img-top" v-bind:src="'images/' + item.image + '.jpg'" alt="Card image cap">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            <!-- <div id="app">
                 <div class="card-group">
-                    <div class="card ow col-md-12" v-for="(item,index) in items">
+                    <div class="card row col-md-12" v-for="(item,index) in items">
                       <img class="card-img-top" v-bind:src="'images/' + item.image + '.jpg'" alt="Card image cap">
                       <div class="card-body">
                         <h5 class="card-title">{{ item.name }}</h5>
                       </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
                   
     </body>
 </html>

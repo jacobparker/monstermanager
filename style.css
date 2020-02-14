@@ -95,10 +95,32 @@ body {
   background-color: #fff
 }
 
+.background {
+  background-image: url(images/background_city.jpg);
+  background-size: cover;
+}
+
+/*.dm_background {
+  background-image: url(images/dm_background.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+  color: #fff;
+}*/
+
 h2, h4 {
   font-family: 'Nunito', sans-serif;
 }
 
+.card-body {
+  background:#fff;
+}
+
+.card-title {
+  text-align: center;
+}
 
 #shopping-list-table{
   table-layout: fixed;
@@ -111,6 +133,6 @@ button {
 }
 
 .viewer-images {
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 400px;
 }

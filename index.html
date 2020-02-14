@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <title>DM</title>
+    <title>Manage ALL the Monsters</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css"/>
@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"</script> -->
-    <body>
+    <body class="dm_background">
 
                   <div id="app">
                         
@@ -21,18 +21,25 @@
                                         <span>{{cat}}</span> <button @click="removeCat(index)">Remove</button>
                                         </p>
                                       </div> -->
-                                      <h4>Add new item</h4>
-                                        <div class="row col-md-6">
-                                            <div class="col-md-4 form-group">
-                                                Name
-                                                <input type="text" v-model="name" class="checkbox">
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                Quantity
-                                                <input type="number" v-model="quantity" class="checkbox" autofocus>
-                                            </div>
-                                            <div class="col-md-4 form-group"> Options
-                                                <select class="form-control" v-model="image">
+                                      <h2>Monster Manager</h2>
+                                      <br/>
+                                      <div>
+                                          <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Name</label>
+                                                <div class="col-sm-10">
+                                                  <input type="text" v-model="name" class="checkbox">
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Health</label>
+                                                <div class="col-sm-10">
+                                                  <input type="number" v-model="quantity" class="checkbox">
+                                                </div>
+                                              </div>
+                                          
+                                            <div class="form-group row"> 
+                                              <label class="col-sm-2 col-form-label">Type of Monster</label>
+                                                <select class="form-control col-sm-2" v-model="image">
                                                     <option>air_cultist</option>
                                                     <option>howling_hatred_priest</option>
                                                     <option>earth_guard</option>
@@ -54,20 +61,21 @@
                                                     <option>giant_vulture</option>
                                                 </select>
                                             </div>
-                                            <button type="button" @click="addCat" class="btn btn-primary" >Add</button>
+                                            <button type="button" @click="addCat" class="btn btn-primary" >Add Monster</button>
                                         </div>
+                                        <br/>
                                       <!-- <div>
                                         <p>Name: <input v-model="name"></p> <p>Quantity: <input type="number" v-model="quantity"></p>
                                         <button @click="addCat">Add Item</button>
                                       </div> -->
-                                      <h2>Item List</h2>
+                                      <h2>List of Current Monsters</h2>
                                       <table id="shopping-list-table" class="table table-condensed table-hover">
                                             <thead>
                                                <tr>
                                                  <th>Name</th>
-                                                 <th>Quantity</th>
-                                                 <th>Total Quantity</th>
-                                                 <th>Image</th>
+                                                 <th>Health</th>
+                                                 <th>Total Health</th>
+                                                 <th>Monster Type</th>
                                                  <th>Actions</th>
                                                </tr>
                                             </thead>
@@ -90,7 +98,8 @@
                                                <td>
                                                 <button type="button" class="btn btn-success" v-show="cat.inEditMode" @click="editItemComplete(cat)"><i class="fa fa-save"></i> Save</button>
                                                 <button type="button" class="btn btn-info" v-show="!cat.inEditMode" @click="editItem(cat)"  ><i class="fa fa-edit"></i> Edit</button>
-                                                <button type="button" class="btn btn-danger" @click="removeCat(index)"><i class="fa fa-remove"></i> Delete</button>
+                                                <button type="button" class="btn btn-danger" @click="removeCat(cat, index)"><i class="fa fa-remove"></i> Delete</button>
+                                                <!-- <button type="button" class="btn btn-danger" @click="removeAllCats(index)"><i class="fa fa-remove"></i> Delete All</button> -->
                                               </td>
                                             </tr>
                                           </table>

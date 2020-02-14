@@ -18,10 +18,10 @@ window.onload = function () {
         // },
         methods: {
            getList() {
-            var self = this;
+            
                  this.$http.get('https://dndviewer-6683c.firebaseio.com/' + ".json")
                 .then(response => {
-                  self.cats = response.data;
+                  this.cats = response.data;
                   // console.log("this.cats: " + this.cats);
                   // console.log("this.cats.name: " + this.cats.name);
                   // for(var i in this.cats){
@@ -56,37 +56,34 @@ window.onload = function () {
               image: this.image, 
               total: this.quantity,
               inEditMode: false
-            },
-            { 
-            }).then(r => console.log('r: ', JSON.stringify(r, null, 2)));
+            }).then((response) => {
+                this.getList();
+              })
             this.name = '';
             this.quantity = '';
             this.image = '';
-            this.saveCats();
-            this.getList();
+            //this.getList();
           },
           editItem(item){
               item.inEditMode = true;
           },
           editItemComplete(item) {
             item.inEditMode = false;
-            this.saveCats();
-          },
-          removeCat(x) {
-            this.$http.delete(this.cats).then((response) => {
-              console.log("deleted");
-            })
-            //this.cats.splice(x,1);
             //this.saveCats();
+          },
+          removeCat(item, index) {
+            this.$http.delete('https://dndviewer-6683c.firebaseio.com/' + index + ".json") 
+              .then((response) => {
+                this.getList();
+              })
+          },
+          removeAllCats(x) {
+            this.$http.delete('https://dndviewer-6683c.firebaseio.com/' + ".json", 
+              {
+                x
+              }).then((response) => {
+              })
           }
-          // saveCats() {
-          //   let parsed = JSON.stringify(this.cats);
-          //   localStorage.setItem('cats', parsed);
-            //this.testAPICall();
-          //}
-        //   testAPICall() {
-        //       console.log("test api call");
-        //   }
         }
           
     })
