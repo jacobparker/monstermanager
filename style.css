@@ -102,7 +102,7 @@ body {
 
 .dm_background {
   background-image: url(images/dm_background.jpg);
-  background-position: center center;
+  /*background-position: center center;*/
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
