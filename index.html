@@ -24,45 +24,53 @@
                                       <h2>Monster Manager</h2>
                                       <br/>
                                       <div>
+                                        <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Turn Order</label>
+                                                <div class="col-sm-10">
+                                                  <input type="text" v-model="turn">
+                                                </div>
+                                              </div>
                                           <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Name</label>
                                                 <div class="col-sm-10">
-                                                  <input type="text" v-model="name" class="checkbox">
+                                                  <input type="text" v-model="name">
                                                 </div>
                                               </div>
                                               <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Health</label>
                                                 <div class="col-sm-10">
-                                                  <input type="number" v-model="quantity" class="checkbox">
+                                                  <input type="number" v-model="quantity">
                                                 </div>
                                               </div>
                                           
                                             <div class="form-group row"> 
                                               <label class="col-sm-2 col-form-label">Type of Monster</label>
                                                 <select class="form-control col-sm-2" v-model="image">
-                                                    <option>air_cultist</option>
-                                                    <option>howling_hatred_priest</option>
-                                                    <option>earth_guard</option>
-                                                    <option>earth_priest</option>
-                                                    <option>fire_cultist</option>
-                                                    <option>flame_priest</option>
-                                                    <option>water_priest</option>
-                                                    <option>water_reaver</option>
-                                                    <option>gargoyle</option>
-                                                    <option>water_reaver</option>
-                                                    <option>sacred_stone_monk</option>
-                                                    <option>hellenrae</option>
-                                                    <option>lich</option>
-                                                    <option>duergar</option>
-                                                    <option>werewolf</option>
-                                                    <option>azer</option>
-                                                    <option>elizar_dryflagon</option>
-                                                    <option>fire_elemental</option>
-                                                    <option>giant_vulture</option>
-                                                    <option>zombie</option>
+                                                  <option>PLAYER</option>
+                                                  <option>air_cultist</option>
+                                                  <option>howling_hatred_priest</option>
+                                                  <option>earth_guard</option>
+                                                  <option>earth_priest</option>
+                                                  <option>fire_cultist</option>
+                                                  <option>flame_priest</option>
+                                                  <option>water_priest</option>
+                                                  <option>water_reaver</option>
+                                                  <option>gargoyle</option>
+                                                  <option>water_reaver</option>
+                                                  <option>sacred_stone_monk</option>
+                                                  <option>hellenrae</option>
+                                                  <option>lich</option>
+                                                  <option>duergar</option>
+                                                  <option>werewolf</option>
+                                                  <option>azer</option>
+                                                  <option>elizar_dryflagon</option>
+                                                  <option>fire_elemental</option>
+                                                  <option>giant_vulture</option>
+                                                  <option>zombie</option>
+                                                  <option>skeleton</option>
                                                 </select>
                                             </div>
-                                            <button type="button" @click="addCat" class="btn btn-primary" >Add Monster</button>
+                                            <button type="button" @click="addCat" class="btn btn-primary" >Add Character</button>
                                         </div>
                                         <br/>
                                       <!-- <div>
@@ -73,6 +81,7 @@
                                       <table class="table table-condensed table-hover table-light">
                                             <thead class="thead-light">
                                                <tr>
+                                                 <th @click="sortBy('turn')">Turn Order</th>
                                                  <th>Name</th>
                                                  <th>Health</th>
                                                  <th>Total Health</th>
@@ -80,7 +89,11 @@
                                                  <th>Actions</th>
                                                </tr>
                                             </thead>
-                                            <tr v-for="(cat, index) in cats">
+                                            <tr v-for="(cat, index) in cats" v-bind:style="cat.dead == true ? 'color: #ff0000;text-decoration: line-through;background:#d3d3d3;' : 'color:#000;'">
+                                              <td>
+                                                <span v-show="!cat.inEditMode">{{ cat.turn }}</span>
+                                                <input v-bind:placeholder="cat.turn" v-show="cat.inEditMode" v-model="cat.turn" />
+                                              </td>
                                               <td>
                                                 <span v-show="!cat.inEditMode">{{ cat.name }}</span>
                                                 <input v-bind:placeholder="cat.name" v-show="cat.inEditMode" v-model="cat.name" />
@@ -97,19 +110,25 @@
                                                   </td>
                                                
                                                <td>
-                                                <button type="button" class="btn btn-success" v-show="cat.inEditMode" @click="editItemComplete(cat)"><i class="fa fa-save"></i> Save</button>
-                                                <button type="button" class="btn btn-info" v-show="!cat.inEditMode" @click="editItem(cat)"  ><i class="fa fa-edit"></i> Edit</button>
-                                                <button type="button" class="btn btn-danger" @click="removeCat(cat, index)"><i class="fa fa-remove"></i> Delete</button>
+                                                <button type="button" class="btn btn-success" v-show="cat.inEditMode" @click="editItemComplete(cat, index)">Save</button>
+                                                <button type="button" class="btn btn-info" v-show="!cat.inEditMode" @click="editItem(cat, index)">Edit</button>
+                                                <button type="button" class="btn btn-warning" v-show="!cat.inEditMode" @click="deadCat(cat, index)">Dead</button>
+                                                <button type="button" class="btn btn-danger" v-show="cat.inEditMode" @click="removeCat(cat, index)">Delete</button>
                                                 <!-- <button type="button" class="btn btn-danger" @click="removeAllCats(index)"><i class="fa fa-remove"></i> Delete All</button> -->
                                               </td>
                                             </tr>
                                           </table>
 
-
                         </form>
                         
-                        
-                      </div>
+                        <!-- <div class="container" v-for="(cat, index) in currentCat">
+                          <h2>Current Turn</h2>
+                          <p>{{cat.turn}}</p>
+                          <p>{{cat.name}}</p>
+                          <p>{{cat.quantity}}</p>
+                          <button type="button" class="btn btn-info" @click="nextCat(cat, index)">Next Turn</button>
+                        </div>
+                      </div> -->
                         
                   
     </body>

@@ -2,15 +2,12 @@
   width: 100px;
   display: inline-block;
 }
-
 @import "breakpoint";
 $breakpoint-to-ems: true;
 $bp-phone-landscape: (min-resolution 1.5dppx) (orientation landscape);
-
 * {
   box-sizing: border-box;
 }
-
 .listing {
   list-style-type: none;
   overflow: hidden;
@@ -46,15 +43,12 @@ $bp-phone-landscape: (min-resolution 1.5dppx) (orientation landscape);
     }
   }
 }
-
 .item-view {
   text-align: center;
 }
-
 .item {
   padding: 10px;
 }
-
 a {
   display: inline-block;
   padding: 10px;
@@ -69,7 +63,6 @@ a {
     top: 0;
   }
 }
-
 .logo {
     width: 50px;
     float: left;
@@ -117,6 +110,14 @@ h2, h4 {
 
 .card-body {
   background:#fff;
+  border-bottom-left-radius: calc(.25rem - 1px);
+  border-bottom-right-radius: calc(.25rem - 1px);
+}
+
+.card-img-top {
+  height: 300px;
+  object-fit: scale-down;
+  background-color: #fff;
 }
 
 .card-title {

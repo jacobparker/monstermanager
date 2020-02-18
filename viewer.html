@@ -16,10 +16,12 @@
             <!-- <h2>Viewer</h2> -->
             <div class="container" id="app">
                 <div class="row">
-                    <div class="col-md-3" v-for="(item,index) in items">
+                    <div class="col-md-3 mb-4" v-if="item.image != 'PLAYER'" v-for="(item,index) in items" v-bind:style="item.dead == true ? 'color: #ff0000; text-decoration: line-through;' : 'color:#000;'" >
                       <img class="card-img-top" v-bind:src="'images/' + item.image + '.jpg'" alt="Card image cap" />
                       <div class="card-body">
                         <h5 class="card-title">{{ item.name }}</h5>
+                        <img style="width:265px;position:absolute;top:0px;left:5px;" v-if="item.bloody == true" v-bind:src="'images/bloody.png'" />
+                        <img style="width:200px;position:absolute;top:15px;left:40px;" v-if="item.dead == true" v-bind:src="'images/dead.png'" />
                       </div>
                     </div>
                   </div>
