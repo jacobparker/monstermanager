@@ -15,29 +15,22 @@ window.onload = function () {
           image: '',
           updatedTurn: '',
           updatedName: '',
-          updatedQuantity: ''
-          //,
-          // currentSort: 'turn',
-          // currentSortDir: 'asc'
+          updatedQuantity: '',
+          orderedCats:[],
+          previousLocation: '',
+          currentLocation: 'blank'
         },
         mounted() {
           this.getList();
-
+          this.getLocation();
         },
         methods: {
-          // sortTurn(s) {
-          //   //if s == current sort, reverse
-          //   if(s === this.currentSort) {
-          //     this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
-          //   }
-          //   this.currentSort = s;
-          // },
            getList() {
             
                  this.$http.get('https://dndviewer-6683c.firebaseio.com/' + ".json")
                 .then(response => {
                   this.cats = response.data;
-                  console.log("this.cats: " + this.cats);
+                  //console.log("this.cats: " + this.cats);
                   // this.currentCat = response.data;
                 }).bind(this)
                 .catch(error => {
@@ -45,9 +38,18 @@ window.onload = function () {
                 })
 
            },
-           // setCurrentCat() {
-           //    this.currentCat = this.cats[0];
-           // },
+           getLocation() {
+              this.$http.get('https://dndlocation-f4256.firebaseio.com/' + ".json")
+                .then(response => {
+                  this.previousLocation = response.data;
+                  //console.log("this.cats: " + this.cats);
+                  // this.currentCat = response.data;
+                }).bind(this)
+                .catch(error => {
+                  console.log(error)
+                })
+
+           },
           addCat() {
             // ensure they actually typed something
             if(!this.name) return;
@@ -134,16 +136,37 @@ window.onload = function () {
                 x
               }).then((response) => {
               });
+          },
+          setLocation(currentLocation) {
+
+            if(this.previousLocation != '') {
+              this.$http.delete('https://dndlocation-f4256.firebaseio.com/' + this.previousLocation + ".json", 
+              {
+                
+              }).then((response) => {
+                this.previousLocation = '';
+              });
+            }
+            
+            this.$http.patch('https://dndlocation-f4256.firebaseio.com/' + this.currentLocation + ".json", 
+            {
+              // the data to post
+              currentLocation
+            }).then((response) => {
+                this.previousLocation = this.currentLocation;
+              })
           }
+          // nextTurn(item, index) {
+          //   console.log("orderedCats: " + this.orderedCats[1].turn);
+          //   this.sortedCats.turn = item.turn + 1;
+          //   //this.setState(orderedCats);
+          // }
       },
       computed:{
         sortedCats: function() {
+          this.orderedCats = _.orderBy(this.cats, 'turn');
           return _.slice(_.orderBy(this.cats, 'turn'),0,1);
         }
-        // ,
-        // orderedCats: function() {
-        //   return _.orderBy(this.cats, index);
-        // }
       }    
     })
 }

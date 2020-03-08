@@ -4,18 +4,29 @@ body {
 }
 
 .background {
-  background-image: url(images/background_city.jpg);
-  background-size: cover;
+  /*background-image: url(images/background_city.jpg);
+  background-size: cover;*/
+  background-color: #fff;
 }
 
 .dm_background {
-  background-image: url(images/dm_background.jpg);
+  background-image: url(images/dm_background2.png);
   /*background-position: center center;*/
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   background-color: #464646;
   color: #fff;
+}
+
+.dynamic_background {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.dynamic_background img {
+  width: 1900px;
 }
 
 h2, h4 {
