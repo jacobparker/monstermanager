@@ -7,35 +7,51 @@ window.onload = function () {
           currentCat: [],
           turn: '',
           name:'',
+          image: '',
           quantity: '',
           total: '',
           dead: false,
           bloody: false,
-          inEditMode: false,
           image: '',
           updatedTurn: '',
           updatedName: '',
-          updatedQuantity: '',
-          currentSort: 'turn',
-          currentSortDir: 'asc'
+          updatedQuantity: ''
+          //,
+          // currentSort: 'turn',
+          // currentSortDir: 'asc'
         },
         mounted() {
           this.getList();
+
         },
         methods: {
+          // sortTurn(s) {
+          //   //if s == current sort, reverse
+          //   if(s === this.currentSort) {
+          //     this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+          //   }
+          //   this.currentSort = s;
+          // },
            getList() {
             
                  this.$http.get('https://dndviewer-6683c.firebaseio.com/' + ".json")
                 .then(response => {
                   this.cats = response.data;
+                  console.log("this.cats: " + this.cats);
+                  // this.currentCat = response.data;
                 }).bind(this)
                 .catch(error => {
                   console.log(error)
                 })
+
            },
+           // setCurrentCat() {
+           //    this.currentCat = this.cats[0];
+           // },
           addCat() {
             // ensure they actually typed something
             if(!this.name) return;
+            
             this.$http.post('https://dndviewer-6683c.firebaseio.com/' + ".json", 
             {
               // the data to post
@@ -45,8 +61,7 @@ window.onload = function () {
               image: this.image, 
               total: this.quantity,
               dead: false,
-              bloody: false,
-              inEditMode: false
+              bloody: false
             }).then((response) => {
                 this.getList();
               })
@@ -55,31 +70,47 @@ window.onload = function () {
             this.quantity = '';
             this.image = '';
           },
-          editItem(item, index){
-              item.inEditMode = true;
-          },
-          editItemComplete(item, index) {
-            //determine if monster is bloody
+          addHealth(item, index) {
             const roundedTotal = Math.round(item.total/2);
-            if(item.quantity <= roundedTotal) {
+            if(item.quantity < roundedTotal) {
               item.bloody = true;
             }
-
-            item.inEditMode = false;
-            this.updatedTurn = item.turn;
-            this.updatedName = item.name;
+            if(item.quantity > roundedTotal) {
+              item.bloody = false;
+            }
             this.updatedQuantity = item.quantity;
+            this.updatedQuantity++;
+            item.quantity = this.updatedQuantity;
+
             this.$http.patch('https://dndviewer-6683c.firebaseio.com/' + index + ".json", 
             {
               // the data to post
-              turn: this.updatedTurn,
-              name: this.updatedName,
               quantity: this.updatedQuantity,
               bloody: item.bloody
             }).then((response) => {
                 this.getList();
               })
+          },
+          removeHealth(item, index) {
+            const roundedTotal = Math.round(item.total/2);
+            if(item.quantity < roundedTotal) {
+              item.bloody = true;
+            }
+            if(item.quantity > roundedTotal) {
+              item.bloody = false;
+            }
+            this.updatedQuantity = item.quantity;
+            this.updatedQuantity--;
+            item.quantity = this.updatedQuantity;
 
+            this.$http.patch('https://dndviewer-6683c.firebaseio.com/' + index + ".json", 
+            {
+              // the data to post
+              quantity: this.updatedQuantity,
+              bloody: item.bloody
+            }).then((response) => {
+                this.getList();
+              })
           },
           deadCat(item, index) {
             this.dead = true;
@@ -104,6 +135,15 @@ window.onload = function () {
               }).then((response) => {
               });
           }
+      },
+      computed:{
+        sortedCats: function() {
+          return _.slice(_.orderBy(this.cats, 'turn'),0,1);
+        }
+        // ,
+        // orderedCats: function() {
+        //   return _.orderBy(this.cats, index);
+        // }
       }    
     })
 }

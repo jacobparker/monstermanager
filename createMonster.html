@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Create ALL the Monsters</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="https://unpkg.com/vuex/dist/vuex.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"</script> -->
+    <body class="background">
+                  <div id="app">         
+                        <form>
+                                      <h2>Create New Monsters</h2>
+                                      <br/>
+                                      <div>
+                                        <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Turn Order</label>
+                                                <div class="col-sm-10">
+                                                  <input type="number" v-model="turn">
+                                                </div>
+                                              </div>
+                                          <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Name</label>
+                                                <div class="col-sm-10">
+                                                  <input type="text" v-model="name">
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">HP</label>
+                                                <div class="col-sm-10">
+                                                  <input type="number" v-model="quantity">
+                                                </div>
+                                              </div>
+                                          
+                                            <div class="form-group row"> 
+                                              <label class="col-sm-2 col-form-label">Type of Monster</label>
+                                                <select class="form-control col-sm-2" v-model="image">
+                                                  <option>PLAYER_Orla</option>
+                                                  <option>PLAYER_Talwyn</option>
+                                                  <option>PLAYER_Tima</option>
+                                                  <option>PLAYER_Vino</option>
+                                                  <option>PLAYER_Xanthan</option>
+                                                  <option>air_cultist</option>
+                                                  <option>azer</option>
+                                                  <option>duergar</option>
+                                                  <option>earth_guard</option>
+                                                  <option>earth_priest</option>
+                                                  <option>elizar_dryflagon</option>
+                                                  <option>fire_elemental</option>
+                                                  <option>fire_cultist</option>
+                                                  <option>flame_priest</option>
+                                                  <option>gargoyle</option>
+                                                  <option>giant_vulture</option>
+                                                  <option>hellenrae</option>
+                                                  <option>howling_hatred_priest</option>
+                                                  <option>lich</option>
+                                                  <option>sacred_stone_monk</option>
+                                                  <option>skeleton</option>
+                                                  <option>water_priest</option>
+                                                  <option>water_reaver</option>
+                                                  <option>werewolf</option>
+                                                  <option>zombie</option>
+                                                </select>
+                                            </div>
+                                            <button type="button" @click="addCat(turn)" class="btn btn-success" >Add Monster</button><br/><br/>
+                                            <a href="index.html" type="button" class="btn btn-info" >Manage All Monsters</a>
+                                        </div>
+                                        <br/>
+                                     </form>
+                        
+                  
+    </body>
+</html>

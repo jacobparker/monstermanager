@@ -16,12 +16,19 @@
             <!-- <h2>Viewer</h2> -->
             <div class="container" id="app">
                 <div class="row">
-                    <div class="col-md-3 mb-4" v-if="item.image != 'PLAYER'" v-for="(item,index) in items" v-bind:style="item.dead == true ? 'color: #ff0000; text-decoration: line-through;' : 'color:#000;'" >
-                      <img class="card-img-top" v-bind:src="'images/' + item.image + '.jpg'" alt="Card image cap" />
+                    <div class="col-md-3 mb-4" v-if="item.image != 'PLAYER_Orla' && item.image != 'PLAYER_Talwyn' && item.image != 'PLAYER_Tima' && item.image != 'PLAYER_Vino' && item.image != 'PLAYER_Xanthan'" v-for="(item,index) in items" >
+                      <img class="card-img-top" v-bind:src="'images/' + item.image + '.jpg'" alt="Card image cap" v-bind:style="item.dead == true ? 'opacity: 0;' : 'color:#000;'" />
+                      <img src="images/flame.gif" v-if="item.image == 'flame_priest'" v-bind:style="item.image == 'flame_priest' ? 'position:absolute;top:-2px;left:182px;height:106px;width:68px' : 'color:#000;'"/>
+                      <img src="images/flame.gif" v-if="item.image == 'fire_elemental'" v-bind:style="item.image == 'fire_elemental' ? 'position:absolute;top:25px;left:-15px;height:275px;width:300px' : 'color:#000;'"/>
+                      <img src="images/rain.gif" v-if="item.image == 'water_priest'" v-bind:style="item.image == 'water_priest' ? 'position:absolute;left:15px;height:340px;width:250px' : 'color:#000;'"/>
+                      <img src="images/rain.gif" v-if="item.image == 'water_reaver'" v-bind:style="item.image == 'water_reaver' ? 'position:absolute;left:15px;height:340px;width:250px' : 'color:#000;'"/>
+                      <img src="images/air.gif" v-if="item.image == 'air_cultist'" v-bind:style="item.image == 'air_cultist' ? 'position:absolute;left:15px;height:340px;width:250px' : 'color:#000;'"/>
+                      <img src="images/earth.gif" v-if="item.image == 'earth_priest'" v-bind:style="item.image == 'earth_priest' ? 'position:absolute;left:15px;height:340px;width:250px' : 'color:#000;'"/>
+                      <img src="images/earth.gif" v-if="item.image == 'earth_guard'" v-bind:style="item.image == 'earth_guard' ? 'position:absolute;left:15px;height:340px;width:250px' : 'color:#000;'"/>
                       <div class="card-body">
-                        <h5 class="card-title">{{ item.name }}</h5>
-                        <img style="width:265px;position:absolute;top:0px;left:5px;" v-if="item.bloody == true" v-bind:src="'images/bloody.png'" />
-                        <img style="width:200px;position:absolute;top:15px;left:40px;" v-if="item.dead == true" v-bind:src="'images/dead.png'" />
+                        <!-- <h5 class="card-title">{{ item.name }}</h5> -->
+                        <img style="width:265px;position:absolute;top:0px;left:5px;" v-if="item.bloody == true && item.dead != true" v-bind:src="'images/bloody.png'" />
+                        <img style="width:255px;height:300px;position:absolute;top:0px;left:15px;" v-if="item.dead == true" v-bind:src="'images/dead.jpg'" />
                       </div>
                     </div>
                   </div>

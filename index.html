@@ -9,127 +9,73 @@
     <script src="https://unpkg.com/vuex/dist/vuex.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+    <script src="https://kit.fontawesome.com/5c4ed8330a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"</script> -->
     <body class="dm_background">
 
                   <div id="app">
-                        
                         <form>
-                                <!-- <div v-for="(cat,index) in cats">
-                                        <p>
-                                        <span>{{cat}}</span> <button @click="removeCat(index)">Remove</button>
-                                        </p>
-                                      </div> -->
-                                      <h2>Monster Manager</h2>
-                                      <br/>
-                                      <div>
-                                        <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Turn Order</label>
-                                                <div class="col-sm-10">
-                                                  <input type="text" v-model="turn">
-                                                </div>
-                                              </div>
-                                          <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Name</label>
-                                                <div class="col-sm-10">
-                                                  <input type="text" v-model="name">
-                                                </div>
-                                              </div>
-                                              <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Health</label>
-                                                <div class="col-sm-10">
-                                                  <input type="number" v-model="quantity">
-                                                </div>
-                                              </div>
+                                      <div class="row">
+                                        <div class="col-sm-8">
+                                          <h4>All Characters</h4>
                                           
-                                            <div class="form-group row"> 
-                                              <label class="col-sm-2 col-form-label">Type of Monster</label>
-                                                <select class="form-control col-sm-2" v-model="image">
-                                                  <option>PLAYER</option>
-                                                  <option>air_cultist</option>
-                                                  <option>howling_hatred_priest</option>
-                                                  <option>earth_guard</option>
-                                                  <option>earth_priest</option>
-                                                  <option>fire_cultist</option>
-                                                  <option>flame_priest</option>
-                                                  <option>water_priest</option>
-                                                  <option>water_reaver</option>
-                                                  <option>gargoyle</option>
-                                                  <option>water_reaver</option>
-                                                  <option>sacred_stone_monk</option>
-                                                  <option>hellenrae</option>
-                                                  <option>lich</option>
-                                                  <option>duergar</option>
-                                                  <option>werewolf</option>
-                                                  <option>azer</option>
-                                                  <option>elizar_dryflagon</option>
-                                                  <option>fire_elemental</option>
-                                                  <option>giant_vulture</option>
-                                                  <option>zombie</option>
-                                                  <option>skeleton</option>
-                                                </select>
-                                            </div>
-                                            <button type="button" @click="addCat" class="btn btn-primary" >Add Character</button>
-                                        </div>
-                                        <br/>
-                                      <!-- <div>
-                                        <p>Name: <input v-model="name"></p> <p>Quantity: <input type="number" v-model="quantity"></p>
-                                        <button @click="addCat">Add Item</button>
-                                      </div> -->
-                                      <!-- <h2>List of Current Monsters</h2> -->
-                                      <table class="table table-condensed table-hover table-light">
+                                         <table class="table table-bordered table-light">
                                             <thead class="thead-light">
-                                               <tr>
-                                                 <th>Turn Order</th>
-                                                 <th>Name</th>
-                                                 <th>Health</th>
-                                                 <th>Total Health</th>
-                                                 <th>Monster Type</th>
-                                                 <th>Actions</th>
+                                               <tr class="row m-0">
+                                                <!-- <th>Current Turn</th> -->
+                                                 <th class="col-2">Turn</th>
+                                                 <th class="col-3">Name</th>
+                                                 <th class="col-4">Health</th>
+                                                 <th class="col-3">Dead?</th>
                                                </tr>
                                             </thead>
-                                            <tr v-for="(cat, index) in cats" v-bind:style="cat.dead == true ? 'color: #ff0000;text-decoration: line-through;background:#d3d3d3;' : 'color:#000;'">
-                                              <td>
-                                                <span v-show="!cat.inEditMode">{{ cat.turn }}</span>
-                                                <input v-bind:placeholder="cat.turn" v-show="cat.inEditMode" v-model="cat.turn" />
+                                            <tr class="row m-0" v-for="(cat, index) in cats" v-bind:style="cat.dead == true ? 'color: #ff0000;background:#d3d3d3;' : 'color:#000;'">
+                                              <!-- <td></td> -->
+                                              <td class="col-2">
+                                                <span>{{ cat.turn }}</span>
                                               </td>
-                                              <td>
-                                                <span v-show="!cat.inEditMode">{{ cat.name }}</span>
-                                                <input v-bind:placeholder="cat.name" v-show="cat.inEditMode" v-model="cat.name" />
+                                              <td class="col-3">
+                                                <span>{{ cat.name }}</span>
                                               </td>
-                                              <td>
-                                                <span v-show="!cat.inEditMode">{{ cat.quantity }}</span>
-                                                <input type="number" v-bind:placeholder="cat.quantity" v-show="cat.inEditMode" v-model="cat.quantity" /> 
-                                              </td>
-                                              <td>
-                                                 <span>{{ cat.total }}</span>
-                                               </td>
-                                               <td>
-                                                    <span>{{ cat.image }}</span>
-                                                  </td>
-                                               
-                                               <td>
-                                                <button type="button" class="btn btn-success" v-show="cat.inEditMode" @click="editItemComplete(cat, index)">Save</button>
-                                                <button type="button" class="btn btn-info" v-show="!cat.inEditMode" @click="editItem(cat, index)">Edit</button>
-                                                <button type="button" class="btn btn-warning" v-show="!cat.inEditMode" @click="deadCat(cat, index)">Dead</button>
-                                                <button type="button" class="btn btn-danger" v-show="cat.inEditMode" @click="removeCat(cat, index)">Delete</button>
+                                              <td class="col-4">
+                                                <span>
+                                                    <input type="button" class="btn btn-success btn-sm" @click="addHealth(cat, index)" value="+"/>
+                                                    {{ cat.quantity }}/{{ cat.total }}
+                                                  <input type="button" class="btn btn-info btn-sm" @click="removeHealth(cat, index)" value="-"/></span>
+                                              </td>                                               
+                                               <td class="col-3">
+                                                <!-- <button type="button" class="btn btn-success" v-show="cat.inEditMode" @click="editItemComplete(cat, index)">Save</button>
+                                                <button type="button" class="btn btn-info" v-show="!cat.inEditMode" @click="editItem(cat, index)">Edit</button> -->
+                                                <button type="button" class="btn btn-danger btn-sm" @click="deadCat(cat, index)"><i class="fas fa-skull-crossbones"></i></button>
+                                                <button type="button" class="btn btn-secondary btn-sm" @click="removeCat(cat, index)"><i class="fas fa-trash-alt"></i></button>
                                                 <!-- <button type="button" class="btn btn-danger" @click="removeAllCats(index)"><i class="fa fa-remove"></i> Delete All</button> -->
                                               </td>
                                             </tr>
                                           </table>
-
+                                        </div>
+                                        
+                                        <div class="col-sm-4">
+                                              <h4>Current Turn</h4>
+                                              <div class="current_turn col-md-3 mb-4" v-for="(item,index) in sortedCats" >
+                                                <img class="card-img-top" v-bind:src="'images/' + item.image + '.jpg'" alt="Card image cap" v-bind:style="item.dead == true ? 'opacity: 0;' : 'color:#000;'" />
+                                                <div class="card-body current_body">
+                                                  <h5 class="card-title current_title">{{ item.image }}</h5>
+                                                  <p class="card-title current_title">{{ item.quantity }}/{{item.total}}</p>
+                                                  <button type="button" class="btn btn-secondary" @click="nextTurn(item, index)">Next Turn</button>
+                                                  <img style="width:265px;position:absolute;top:0px;left:5px;" v-if="item.bloody == true && item.dead != true" v-bind:src="'images/bloody.png'" />
+                                                  <img style="width:255px;height:300px;position:absolute;top:0px;left:15px;" v-if="item.dead == true" v-bind:src="'images/dead.jpg'" />
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <a href="createMonster.html" type="button" class="btn btn-warning">Add New Monster</a>
+                                      </div>
+                                          
+                                            
+                                            
                         </form>
-                        
-                        <!-- <div class="container" v-for="(cat, index) in currentCat">
-                          <h2>Current Turn</h2>
-                          <p>{{cat.turn}}</p>
-                          <p>{{cat.name}}</p>
-                          <p>{{cat.quantity}}</p>
-                          <button type="button" class="btn btn-info" @click="nextCat(cat, index)">Next Turn</button>
-                        </div>
-                      </div> -->
-                        
+                      </div>
                   
     </body>
 </html>
