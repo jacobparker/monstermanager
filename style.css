@@ -4,8 +4,8 @@ body {
 }
 
 .background {
-  /*background-image: url(images/background_city.jpg);
-  background-size: cover;*/
+  background-image: url(images/background_city.jpg);
+  background-size: cover;
   background-color: #fff;
 }
 
@@ -17,6 +17,11 @@ body {
   background-size: cover;
   background-color: #464646;
   color: #fff;
+}
+
+.viewer_background {
+  background-size: cover;
+  background-color: #fff;
 }
 
 .dynamic_background {

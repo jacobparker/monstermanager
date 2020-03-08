@@ -26,8 +26,6 @@ window.onload = function () {
               this.$http.get('https://dndlocation-f4256.firebaseio.com/' + ".json")
                 .then(response => {
                   this.locations = response.data;
-                  console.log("locations:" + this.locations);
-                  console.log("currentLocation:" + this.locations.currentLocation);
                 }).bind(this)
                 .catch(error => {
                   console.log(error)
