@@ -11,12 +11,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- <meta http-equiv="refresh" content="5"> -->
-    <body class="viewer_background" >
+    <body class="background" >
             <!-- <h2>Viewer</h2> -->
             <div class="container" id="app">
-              <div class="dynamic_background" v-for="currentLocation in locations">
+              <!--<div class="dynamic_background" v-for="currentLocation in locations">
                 <img v-bind:src="'images/' + currentLocation.currentLocation + '.jpg'" />
-              </div>
+              </div>-->
                 <div class="row">
                     <div class="col-md-3 mb-4" v-if="item.image != 'PLAYER_Orla' && item.image != 'PLAYER_Talwyn' && item.image != 'PLAYER_Tima' && item.image != 'PLAYER_Vino' && item.image != 'PLAYER_Xanthan'" v-for="(item,index) in items" >
                       <img class="card-img-top" v-bind:src="'images/' + item.image + '.jpg'" alt="Card image cap" v-bind:style="item.dead == true ? 'opacity: 0;' : 'color:#000;'" />
